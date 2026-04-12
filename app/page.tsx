@@ -433,7 +433,7 @@ function F({ children, delay = 0, direction = "up", style: st = {} }: { children
     right: "translateX(40px)",
     scale: "scale(0.92)",
   };
-  return <div ref={ref} style={{ ...st, opacity: v ? 1 : 0, transform: v ? "none" : transforms[direction] || transforms.up, transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s` }}>{children}</div>;
+  return <div ref={ref} style={{ ...st, opacity: v ? 1 : 0, transform: v ? "none" : (transforms as any)[direction] || transforms.up, transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s` }}>{children}</div>;
 }
 
 function HeroParticles() {
