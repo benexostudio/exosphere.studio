@@ -421,7 +421,7 @@ function useInView(th = 0.12) {
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.unobserve(el); } }, { threshold: th });
     obs.observe(el); return () => obs.disconnect();
   }, [th]);
-  return [ref, v];
+  return [ref, v] as const;
 }
 
 function F({ children, delay = 0, direction = "up", style: st = {} }: { children: any, delay?: number, direction?: string, style?: any }) {
