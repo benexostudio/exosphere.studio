@@ -397,7 +397,7 @@ const translations = {
 
 const LangContext = createContext("en");
 function useLang() { return useContext(LangContext); }
-function useT() { const lang = useLang(); return translations[lang]; }
+function useT() { const lang = useLang(); return (translations as any)[lang]; }
 
 // --- DESIGN TOKENS ---
 const A = "#aaff45";
