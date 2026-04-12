@@ -424,9 +424,9 @@ function useInView(th = 0.12) {
   return [ref, v] as const;
 }
 
-function F({ children, delay = 0, direction = "up", style: st = {} }: { children: any, delay?: number, direction?: string, style?: any }) {
+function F({ children, delay = 0, direction = "up", style: st = {} }: { children: any, delay?: number, direction?: "up" | "down" | "left" | "right" | "scale", style?: any }) {
   const [ref, v] = useInView();
-  const transforms = {
+  const transforms: Record<string, string> = {
     up: "translateY(30px)",
     down: "translateY(-30px)",
     left: "translateX(-40px)",
