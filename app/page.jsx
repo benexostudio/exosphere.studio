@@ -397,7 +397,7 @@ const translations = {
 
 const LangContext = createContext("en");
 function useLang() { return useContext(LangContext); }
-function useT() { const lang = useLang(); return (translations as any)[lang]; }
+function useT() { const lang = useLang(); return translations[lang]; }
 
 // --- DESIGN TOKENS ---
 const A = "#aaff45";
@@ -424,16 +424,16 @@ function useInView(th = 0.12) {
   return [ref, v] as const;
 }
 
-function F({ children, delay = 0, direction = "up", style: st = {} }: { children: any, delay?: number, direction?: "up" | "down" | "left" | "right" | "scale", style?: any }) {
+function F({ children, delay = 0, direction = "up", style: st = {} }) {
   const [ref, v] = useInView();
-  const transforms: Record<string, string> = {
+  const transforms = {
     up: "translateY(30px)",
     down: "translateY(-30px)",
     left: "translateX(-40px)",
     right: "translateX(40px)",
     scale: "scale(0.92)",
   };
-  return <div ref={ref} style={{ ...st, opacity: v ? 1 : 0, transform: v ? "none" : (transforms as any)[direction] || transforms.up, transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s` }}>{children}</div>;
+  return <div ref={ref} style={{ ...st, opacity: v ? 1 : 0, transform: v ? "none" : transforms[direction] || transforms.up, transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}s` }}>{children}</div>;
 }
 
 function HeroParticles() {
@@ -547,7 +547,7 @@ function HeroParticles() {
 }
 
 // --- COMPONENTS ---
-function LangSwitcher({ lang, setLang }: { lang: string, setLang: any }) {
+function LangSwitcher({ lang, setLang }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const labels = { en: "EN", de: "DE", es: "ES", it: "IT", fr: "FR" };
@@ -599,7 +599,7 @@ function LangSwitcher({ lang, setLang }: { lang: string, setLang: any }) {
   );
 }
 
-function Nav({ lang, setLang }: { lang: string, setLang: any }) {
+function Nav({ lang, setLang }) {
   const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -750,17 +750,17 @@ function Hero() {
   );
 }
 
-function SL({ children }: { children: any }) {
+function SL({ children }) {
   return <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: A, marginBottom: 14, display: "flex", alignItems: "center", gap: 8 }}>
     <span style={{ width: 18, height: 1, background: A, display: "inline-block" }} />{children}
   </div>;
 }
 
-function ST({ children }: { children: any }) {
+function ST({ children }) {
   return <h2 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(24px, 4.5vw, 44px)", fontWeight: 700, color: TW, lineHeight: 1.1, letterSpacing: "-0.02em", maxWidth: 600, marginBottom: 32 }}>{children}</h2>;
 }
 
-function Input({ label, placeholder, type = "text", area = false }: { label: string, placeholder: string, type?: string, area?: boolean }) {
+function Input({ label, placeholder, type = "text", area = false }) {
   const props = { placeholder, style: { width: "100%", background: "rgba(255,255,255,0.025)", border: `1px solid ${B}`, borderRadius: 4, color: "#fff", fontFamily: "'DM Sans', sans-serif", fontSize: 13, padding: area ? "10px 12px" : "10px 12px", outline: "none", transition: "border-color 0.2s", ...(area ? { height: 90, resize: "vertical" } : {}) },
     onFocus: e => e.currentTarget.style.borderColor = A, onBlur: e => e.currentTarget.style.borderColor = B };
   return (
@@ -771,7 +771,7 @@ function Input({ label, placeholder, type = "text", area = false }: { label: str
   );
 }
 
-function Btn({ children, onClick }: { children: any, onClick: any }) {
+function Btn({ children, onClick }) {
   return <button onClick={onClick} style={{ width: "100%", fontFamily: "'JetBrains Mono', monospace", fontSize: 12, letterSpacing: "0.05em", textTransform: "uppercase", padding: "13px 24px", background: A, color: BG, border: "none", borderRadius: 4, fontWeight: 600, cursor: "pointer", boxShadow: `0 0 16px ${AG}`, transition: "all 0.25s" }}>{children}</button>;
 }
 
