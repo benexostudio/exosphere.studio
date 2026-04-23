@@ -710,7 +710,7 @@ function Hero() {
     <section
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", padding: "100px clamp(20px, 5vw, 72px) 72px", position: "relative", overflow: "hidden", textAlign: "center" }}>
       <HeroParticles />
-      <div style={{ position: "absolute", inset: 0, opacity: 0.015, pointerEvents: "none", backgroundImage: `linear-gradient(${A} 1px, transparent 1px), linear-gradient(90deg, ${A} 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
+      <div style={{ position: "absolute", inset: 0, opacity: 0, pointerEvents: "none", backgroundImage: `linear-gradient(${A} 1px, transparent 1px), linear-gradient(90deg, ${A} 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
 
       <F direction="scale" delay={0}>
         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: A, marginBottom: 28, display: "flex", alignItems: "center", gap: 10, justifyContent: "center" }}>
